@@ -1,6 +1,6 @@
 # Proyecto_Informatico
 
-Developers:
+Developers: /n
 -Alisson Tobar Ariza
 -Javier Andres Vasquez Pabon
 -Simon David Colmenares Sanchez
