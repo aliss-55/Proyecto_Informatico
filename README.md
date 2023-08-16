@@ -1,8 +1,8 @@
 # Proyecto_Informatico
 
 ## Developers:
-+Alisson Tobar Ariza
-+Javier Andres Vasquez Pabon
-*Simon David Colmenares Sanchez
-*Diego Maya Perea
-*Julian David Velasquez Patiño
+1. Alisson Tobar Ariza
+2. Javier Andres Vasquez Pabon
+3. Simon David Colmenares Sanchez
+4. Diego Maya Perea
+5. Julian David Velasquez Patiño
