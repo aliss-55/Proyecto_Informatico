@@ -9,9 +9,15 @@ export class AuthController {
 
     @Post('login')
     async loginUser(@Body() userObjectLogin: LoginDto) {
-        console.log(userObjectLogin);
-        const data = await this.authService.login(userObjectLogin);
-        //return this.authService.login(userObjectLogin);
+        const isAuthenticated = await this.authService.login(userObjectLogin);
+
+        if (isAuthenticated) {
+            // Autenticación exitosa: redirigir o realizar alguna acción
+            console.log('Autenticación exitosa');
+        } else {
+            // Autenticación fallida: redirigir o realizar otra acción
+            return isAuthenticated;
+        }
 
     }
 }

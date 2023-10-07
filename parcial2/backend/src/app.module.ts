@@ -15,7 +15,7 @@ import { AuthModule } from './auth/auth.module';
       password: '',
       database: 'askapp',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
     }),
     UsersModule,
     AuthModule],
