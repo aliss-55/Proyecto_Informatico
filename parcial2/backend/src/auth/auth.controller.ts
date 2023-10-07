@@ -10,14 +10,6 @@ export class AuthController {
     @Post('login')
     async loginUser(@Body() userObjectLogin: LoginDto) {
         const isAuthenticated = await this.authService.login(userObjectLogin);
-
-        if (isAuthenticated) {
-            // Autenticación exitosa: redirigir o realizar alguna acción
-            console.log('Autenticación exitosa');
-        } else {
-            // Autenticación fallida: redirigir o realizar otra acción
-            return isAuthenticated;
-        }
-
+        return isAuthenticated;
     }
 }
