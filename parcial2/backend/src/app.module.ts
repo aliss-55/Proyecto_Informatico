@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import {TypeOrmModule} from '@nestjs/typeorm'
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { TasksModule } from './tasks/tasks.module';
 
@@ -20,7 +20,8 @@ import { TasksModule } from './tasks/tasks.module';
     }),
     UsersModule,
     AuthModule,
-    TasksModule],
+    TasksModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

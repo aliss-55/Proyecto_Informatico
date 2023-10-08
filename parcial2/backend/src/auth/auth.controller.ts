@@ -4,12 +4,11 @@ import { LoginDto } from './dto/login-auth.dto';
 
 @Controller('auth')
 export class AuthController {
-    
-    constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
-    @Post('login')
-    async loginUser(@Body() userObjectLogin: LoginDto) {
-        const isAuthenticated = await this.authService.login(userObjectLogin);
-        return isAuthenticated;
-    }
+  @Post('login')
+  async loginUser(@Body() userObjectLogin: LoginDto) {
+    const isAuthenticated = await this.authService.login(userObjectLogin);
+    return isAuthenticated;
+  }
 }
