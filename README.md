@@ -10,6 +10,16 @@
 4. Diego Maya Perea
 5. Julian David Velasquez Patiño
 
+## IMPORTANT NOTE
+The developer team has taken the decision to migrate from PHP to TypeScript with frameworks like NestJS and React. This changes
+will be uploaded inside the folder named "parcial2"
+
+To use this new app, please follow the next steps:
+
+1. Open a terminal inside each carpet (except "Database") and run the comand "npm install"
+2. To run the Backend, in the open terminal asociated to "backend" run "npm run start:dev"
+3. To run the Frontend, in the open terminal asociated to "frontend" run "npm run dev"
+
 ## Functional Requirements
 
 For this project, the development team has found critical requirements for this Login Screen App.
