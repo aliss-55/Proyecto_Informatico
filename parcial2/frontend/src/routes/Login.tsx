@@ -27,11 +27,11 @@ export default function Login() {
       .then((res) => res.json())
       .then((res) => {
         if (res === true) {
-          auth.isAuthenticated = true;
+          auth.isAuthenticated = res;
           navigate("/Dashboard");
         } else {
+          auth.isAuthenticated = res;
           alert("Verifique sus datos de ingreso");
-          auth.isAuthenticated = false;
         }
       });
   };
