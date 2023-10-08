@@ -5,12 +5,12 @@ interface AuthProviderProps {
 }
 
 const AuthContext = createContext({
-    isAuthenticated: false,
+    isAuthenticated: false
 })
 
 export function AuthProvider({ children }: AuthProviderProps) {
 
-    const [isAuthenticated/*, setIsAuthenticated*/] = useState(false);
+    const [isAuthenticated] = useState(false);
 
     return (
         <AuthContext.Provider value={{ isAuthenticated }}>

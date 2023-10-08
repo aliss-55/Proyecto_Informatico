@@ -13,7 +13,7 @@ import { TasksModule } from './tasks/tasks.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '',
+      password: 'root',
       database: 'askapp',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: false,

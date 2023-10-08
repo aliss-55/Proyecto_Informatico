@@ -1,21 +1,24 @@
 import background from "../assets/fondo_derecho.jpeg";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../auth/AuthProvider";
-import { Navigate} from "react-router-dom";
+
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const auth = useAuth();
-
-    if (auth.isAuthenticated) {
-        return <Navigate to="/Dashboard" />
-    }
+    const navigate = useNavigate();
+    
+    // if (auth.isAuthenticated) {
+    //     return <Navigate to="/Dashboard" />
+    // }
+    
     const login = () => {
         fetch("http://localhost:3000/auth/login", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type":"application/json",
           },
           body: JSON.stringify({
             email: email,
@@ -24,10 +27,12 @@ export default function Login() {
         })
         .then((res) => res.json())
           .then((res) => {
-            if(res.success === true){
-                console.log('real');
+            if(res === true){
+                auth.isAuthenticated = true;
+                navigate("/Dashboard");
             }else{
-                console.log('falso');
+                alert("Verifique sus datos de ingreso");
+                auth.isAuthenticated = false;
             }
           })
           .catch((err) => {
