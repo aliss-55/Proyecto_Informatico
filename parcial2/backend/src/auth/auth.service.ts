@@ -7,23 +7,23 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-    constructor(@InjectRepository(User) private userRepository:
-        Repository<User>) { }
+  constructor(
+    @InjectRepository(User) private userRepository: Repository<User>,
+  ) {}
 
-    async login(userObjectLogin: LoginDto): Promise<boolean> {
-        const { email, password } = userObjectLogin;
-        const findUser = await this.userRepository.findOne({where: {email}});
+  async login(userObjectLogin: LoginDto): Promise<boolean> {
+    const { email, password } = userObjectLogin;
+    const findUser = await this.userRepository.findOne({ where: { email } });
 
-        if (!findUser) {
-            return false;
-        }
-
-        const chechkPassword = await bcrypt.compare(password, findUser.password);
-        if (!chechkPassword){
-            return false;
-        }
-
-        return true;
-
+    if (!findUser) {
+      return false;
     }
+
+    const chechkPassword = await bcrypt.compare(password, findUser.password);
+    if (!chechkPassword) {
+      return false;
+    }
+
+    return true;
+  }
 }

@@ -1,11 +1,9 @@
 import { IsString, IsNotEmpty, IsEmail } from 'class-validator';
 
 export class UpdateTaskDto {
-    
-    title?: string
+  title?: string;
 
-    description?: string
+  description?: string;
 
-    status?: string
-
+  status?: string;
 }

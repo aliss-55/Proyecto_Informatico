@@ -6,9 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoginDto } from './dto/login-auth.dto';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([LoginDto]),
-  UsersModule],
+  imports: [TypeOrmModule.forFeature([LoginDto]), UsersModule],
   controllers: [AuthController],
-  providers: [AuthService]
+  providers: [AuthService],
 })
 export class AuthModule {}
