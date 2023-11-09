@@ -1,6 +1,6 @@
 import '../routes/Dashboard.css'
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Table,
   Button,
@@ -12,8 +12,8 @@ import {
   ModalFooter,
 } from "reactstrap";
 
-let datos= [];
-const data = () => {
+var newData = new Array();
+function data() {
   fetch("http://localhost:3000/tasks", {
     method: "GET",
     headers: {
@@ -27,13 +27,15 @@ const data = () => {
     return response.json();
   })
   .then((data) => {
-    datos=data;
+    newData=data;
   })
 }
+
+data();
   
   class App extends React.Component {
     state = {
-      datos:data,
+      data:newData,
       modalActualizar: false,
       modalInsertar: false,
       form: {
@@ -74,6 +76,30 @@ const data = () => {
       });
     };
 
+    
+    eliminar = (dato: any) => {
+      var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento " + dato.id);
+      if (opcion == true) {
+        return fetch(`http://localhost:3000/tasks/${dato.id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .catch((error) => {
+            console.error("Error al eliminar la tarea:", error);
+            throw error;
+          });
+      };
+    };
+
+
     render() {
       
       return (
@@ -93,7 +119,7 @@ const data = () => {
                 </tr>
               </thead>
               <tbody>
-                {this.state.datos.map((dato) => (
+                {this.state.data.map((dato) => (
                   <tr key={dato.id}>
                     <td>{dato.id}</td>
                     <td>{dato.title}</td>
@@ -193,7 +219,7 @@ const data = () => {
                   className="form-control"
                   readOnly
                   type="text"
-                  value={this.state.datos.length+1}
+                  value={this.state.data.length+1}
                 />
               </FormGroup>
               
