@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { TasksModule } from './tasks/tasks.module';
+import { Task } from './tasks/task.entity';
 
 @Module({
   imports: [
@@ -13,11 +14,12 @@ import { TasksModule } from './tasks/tasks.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: '',
       database: 'askapp',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: false,
     }),
+    TypeOrmModule.forFeature([Task]),
     UsersModule,
     AuthModule,
     TasksModule,
