@@ -76,7 +76,26 @@ data();
       });
     };
 
-    
+    insertar = (taskData: any) => {
+      return fetch(`http://localhost:3000/tasks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(taskData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .catch((error) => {
+          console.error("Error al Crear la tarea:", error);
+          throw error;
+        });
+    };
+
     eliminar = (dato: any) => {
       var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento " + dato.id);
       if (opcion == true) {
@@ -98,7 +117,25 @@ data();
           });
       };
     };
-
+    editar = (dato: any) => {
+      return fetch(`http://localhost:3000/tasks/${dato.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dato),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .catch((error) => {
+          console.error("Error al editar la tarea:", error);
+          throw error;
+        });
+    };
 
     render() {
       
@@ -144,7 +181,7 @@ data();
             <ModalHeader>
              <div><h3>Editar Registro</h3></div>
             </ModalHeader>
-  
+            
             <ModalBody>
               <FormGroup>
                 <label>
@@ -171,7 +208,6 @@ data();
                   value={this.state.form.title}
                 />
               </FormGroup>
-              
               <FormGroup>
                 <label>
                   Description: 
@@ -276,7 +312,7 @@ data();
             <ModalFooter>
               <Button
                 color="primary"
-                onClick={() => this.insertar()}
+                onClick={() => this.insertar(this.state.form)}
               >
                 Insertar
               </Button>
