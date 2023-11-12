@@ -45,7 +45,7 @@ data();
         status: "",
       },
     };
-  
+    
     mostrarModalActualizar = (dato: any) => {
       this.setState({
         form: dato,
@@ -76,13 +76,32 @@ data();
       });
     };
 
-    insertar = (taskData: any) => {
+    actualizar = () => {
+      return fetch(`http://localhost:3000/tasks`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          console.log(response.json());
+        })
+        .catch((error) => {
+          console.error("Error al actualizar la tarea:", error);
+          throw error;
+        });
+    };
+    
+    insertar = (dato: any) => {
       return fetch(`http://localhost:3000/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(taskData),
+        body: JSON.stringify(dato),
       })
         .then((response) => {
           if (!response.ok) {
@@ -129,7 +148,8 @@ data();
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          return response.json();
+          return response.json(),
+          data();
         })
         .catch((error) => {
           console.error("Error al editar la tarea:", error);
@@ -181,28 +201,15 @@ data();
             <ModalHeader>
              <div><h3>Editar Registro</h3></div>
             </ModalHeader>
-            
-            <ModalBody>
-              <FormGroup>
-                <label>
-                 Id:
-                </label>
-              
-                <input
-                  className="form-control"
-                  readOnly
-                  type="text"
-                  value={this.state.form.id}
-                />
-              </FormGroup>
-              
+
+            <ModalBody>             
               <FormGroup>
                 <label>
                   Tarea: 
                 </label>
                 <input
                   className="form-control"
-                  name="Title"
+                  name="title"
                   type="text"
                   onChange={this.handleChange}
                   value={this.state.form.title}
@@ -238,7 +245,10 @@ data();
             <ModalFooter>
               <Button
                 color="primary"
-                onClick={() => this.editar(this.state.form)}
+                onClick={() => {this.editar(this.state.form)
+                  .then(() => data())
+                  .then(() => this.setState({ modalActualizar: false }));
+              }}
               >
                 Editar
               </Button>
@@ -251,27 +261,22 @@ data();
             </ModalFooter>
           </Modal>
   
-  
-  
           <Modal isOpen={this.state.modalInsertar}>
             <ModalHeader>
              <div><h3>Insertar Tarea</h3></div>
-            </ModalHeader>
-  
+            </ModalHeader>  
             <ModalBody>
-              <FormGroup>
-                <label>
-                  Id: 
-                </label>
-                
-                <input
-                  className="form-control"
-                  readOnly
-                  type="text"
-                  value={this.state.data.length+1}
-                />
-              </FormGroup>
-              
+            <FormGroup>
+              <label>
+                Id: 
+              </label>
+              <input
+                className="form-control"
+                readOnly
+                type="text"
+                value={this.state.data.length+1}
+              />
+            </FormGroup>            
               <FormGroup>
                 <label>
                   Title: 
@@ -312,7 +317,7 @@ data();
             <ModalFooter>
               <Button
                 color="primary"
-                onClick={() => this.insertar(this.state.form)}
+                onClick={() => {this.insertar(this.state.form);this.actualizar;this.setState({ modalInsertar: false })}}
               >
                 Insertar
               </Button>
