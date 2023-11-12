@@ -1,6 +1,6 @@
 import '../routes/Dashboard.css'
 import React from "react";
-//import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Table,
   Button,
@@ -178,10 +178,23 @@ data();
                 </label>
                 <input
                   className="form-control"
-                  name="anime"
+                  name="description"
                   type="text"
                   onChange={this.handleChange}
                   value={this.state.form.description}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <label>
+                  Status: 
+                </label>
+                <input
+                  className="form-control"
+                  name="status"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.form.status}
                 />
               </FormGroup>
             </ModalBody>
