@@ -278,7 +278,6 @@ data();
               </label>
               <input
                 className="form-control"
-                
                 name="id"
                 type="text"
                 onChange={this.handleChange}
