@@ -112,7 +112,7 @@ data();
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          var opcion = window.alert("Dato insertado con exito");
+          var opcion = window.alert("Data inserted successfully");
           opcion;
           this.actualizar();
         })
@@ -122,7 +122,7 @@ data();
     };
 
     eliminar = (dato: any) => {
-      var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento " + dato.id);
+      var opcion = window.confirm("Are you sure you want to delete the item " + dato.id);
       if (opcion == true) {
         return fetch(`http://localhost:3000/tasks/${dato.id}`, {
           method: "DELETE",
@@ -154,7 +154,7 @@ data();
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          var hecho = window.alert("Tarea editada con exito");
+          var hecho = window.alert("Task edited successfully");
           hecho;
           this.actualizar();        
         })
@@ -169,7 +169,7 @@ data();
         <>
           <Container>
           <br />
-            <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
+            <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Create</Button>
             <br />
             <br />
             <Table>
@@ -193,9 +193,9 @@ data();
                         color="primary"
                         onClick={() => this.mostrarModalActualizar(dato)}
                       >
-                        Editar
+                        Edit
                       </Button>{" "}
-                      <Button color="danger" onClick={() => {this.eliminar(dato);}}>Eliminar</Button>
+                      <Button color="danger" onClick={() => {this.eliminar(dato);}}>Delete</Button>
                     </td>
                   </tr>
                 ))}
@@ -205,13 +205,13 @@ data();
   
           <Modal isOpen={this.state.modalActualizar}>
             <ModalHeader>
-             <div><h3>Editar Registro</h3></div>
+             <div><h3>Edit Task</h3></div>
             </ModalHeader>
 
             <ModalBody>             
               <FormGroup>
                 <label>
-                  Tarea: 
+                  Task: 
                 </label>
                 <input
                   className="form-control"
@@ -253,20 +253,20 @@ data();
                 color="primary"
                 onClick={() => {this.editar(this.state.form); this.setState({ modalActualizar: false })}}
               >
-                Editar
+                Edit
               </Button>
               <Button
                 color="danger"
                 onClick={() => this.cerrarModalActualizar()}
               >
-                Cancelar
+                Cancel
               </Button>
             </ModalFooter>
           </Modal>
   
           <Modal isOpen={this.state.modalInsertar}>
             <ModalHeader>
-             <div><h3>Insertar Tarea</h3></div>
+             <div><h3>Insert Task</h3></div>
             </ModalHeader>  
             <ModalBody>
             <FormGroup>
@@ -324,13 +324,13 @@ data();
                 color="primary"
                 onClick={() => {this.insertar(this.state.form);this.actualizar();this.setState({ modalInsertar: false })}}
               >
-                Insertar
+                Insert
               </Button>
               <Button
                 className="btn btn-danger"
                 onClick={() => this.cerrarModalInsertar()}
               >
-                Cancelar
+                Cancel
               </Button>
             </ModalFooter>
           </Modal>
