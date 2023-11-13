@@ -238,13 +238,16 @@ data();
                 <label>
                   Status: 
                 </label>
-                <input
-                  className="form-control"
+                <select
+                  className="form-select"
                   name="status"
-                  type="text"
                   onChange={this.handleChange}
                   value={this.state.form.status}
-                />
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="In_Progress">In Progress</option>
+                  <option value="Done">Done</option>
+                </select>
               </FormGroup>
             </ModalBody>
   
@@ -310,12 +313,16 @@ data();
                 <label>
                   Status: 
                 </label>
-                <input
-                  className="form-control"
+                <select
+                  className="form-select"
                   name="status"
-                  type="text"
                   onChange={this.handleChange}
-                />
+                  value={this.state.form.status}
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="In_Progress">In Progress</option>
+                  <option value="Done">Done</option>
+                </select>
               </FormGroup>
             </ModalBody>
   
