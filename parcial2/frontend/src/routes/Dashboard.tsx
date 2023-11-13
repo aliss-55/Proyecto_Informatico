@@ -46,6 +46,29 @@ data();
       },
     };
     
+    actualizar() {
+      fetch("http://localhost:3000/tasks", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.setState({
+            data: data,
+          });
+        })
+        .catch((error) => {
+          throw error;
+        });
+    }
+
     mostrarModalActualizar = (dato: any) => {
       this.setState({
         form: dato,
@@ -56,17 +79,17 @@ data();
     cerrarModalActualizar = () => {
       this.setState({ modalActualizar: false });
     };
-  
+
     mostrarModalInsertar = () => {
       this.setState({
         modalInsertar: true,
       });
     };
-  
+
     cerrarModalInsertar = () => {
       this.setState({ modalInsertar: false });
     };
-  
+
     handleChange = (e: { target: { name: any; value: any; }; }) => {
       this.setState({
         form: {
@@ -76,41 +99,24 @@ data();
       });
     };
 
-    actualizar = () => {
-      return fetch(`http://localhost:3000/tasks`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          console.log(response.json());
-        })
-        .catch((error) => {
-          console.error("Error al actualizar la tarea:", error);
-          throw error;
-        });
-    };
-    
     insertar = (dato: any) => {
-      return fetch(`http://localhost:3000/tasks`, {
+      return fetch(`http://localhost:3000/tasks/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(dato),
+        body: JSON.stringify(dato)
       })
         .then((response) => {
+          console.log(dato);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          return response.json();
+          var opcion = window.alert("Dato insertado con exito");
+          opcion;
+          this.actualizar();
         })
         .catch((error) => {
-          console.error("Error al Crear la tarea:", error);
           throw error;
         });
     };
@@ -128,10 +134,10 @@ data();
             if (!response.ok) {
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
+            this.actualizar();
             return response.json();
           })
           .catch((error) => {
-            console.error("Error al eliminar la tarea:", error);
             throw error;
           });
       };
@@ -148,11 +154,11 @@ data();
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
-          return response.json(),
-          data();
+          var hecho = window.alert("Tarea editada con exito");
+          hecho;
+          this.actualizar();        
         })
         .catch((error) => {
-          console.error("Error al editar la tarea:", error);
           throw error;
         });
     };
@@ -189,7 +195,7 @@ data();
                       >
                         Editar
                       </Button>{" "}
-                      <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
+                      <Button color="danger" onClick={() => {this.eliminar(dato);}}>Eliminar</Button>
                     </td>
                   </tr>
                 ))}
@@ -245,10 +251,7 @@ data();
             <ModalFooter>
               <Button
                 color="primary"
-                onClick={() => {this.editar(this.state.form)
-                  .then(() => data())
-                  .then(() => this.setState({ modalActualizar: false }));
-              }}
+                onClick={() => {this.editar(this.state.form); this.setState({ modalActualizar: false })}}
               >
                 Editar
               </Button>
@@ -272,9 +275,11 @@ data();
               </label>
               <input
                 className="form-control"
-                readOnly
+                
+                name="id"
                 type="text"
-                value={this.state.data.length+1}
+                onChange={this.handleChange}
+                
               />
             </FormGroup>            
               <FormGroup>
@@ -283,7 +288,7 @@ data();
                 </label>
                 <input
                   className="form-control"
-                  name="Title"
+                  name="title"
                   type="text"
                   onChange={this.handleChange}
                 />
@@ -295,7 +300,7 @@ data();
                 </label>
                 <input
                   className="form-control"
-                  name="Description"
+                  name="description"
                   type="text"
                   onChange={this.handleChange}
                 />
@@ -307,7 +312,7 @@ data();
                 </label>
                 <input
                   className="form-control"
-                  name="Status"
+                  name="status"
                   type="text"
                   onChange={this.handleChange}
                 />
@@ -317,7 +322,7 @@ data();
             <ModalFooter>
               <Button
                 color="primary"
-                onClick={() => {this.insertar(this.state.form);this.actualizar;this.setState({ modalInsertar: false })}}
+                onClick={() => {this.insertar(this.state.form);this.actualizar();this.setState({ modalInsertar: false })}}
               >
                 Insertar
               </Button>
