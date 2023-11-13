@@ -244,7 +244,7 @@ data();
                   onChange={this.handleChange}
                   value={this.state.form.status}
                 >
-                  <option value="Pending">Pending</option>
+                  <option value="Pendin">Pending</option>
                   <option value="In_Progress">In Progress</option>
                   <option value="Done">Done</option>
                 </select>
@@ -318,7 +318,7 @@ data();
                   onChange={this.handleChange}
                   value={this.state.form.status}
                 >
-                  <option value="Pending">Pending</option>
+                  <option value="Pendin">Pending</option>
                   <option value="In_Progress">In Progress</option>
                   <option value="Done">Done</option>
                 </select>
@@ -328,7 +328,7 @@ data();
             <ModalFooter>
               <Button
                 color="primary"
-                onClick={() => {this.insertar(this.state.form);this.actualizar();this.setState({ modalInsertar: false })}}
+                onClick={() => {this.insertar(this.state.form);this.setState({ modalInsertar: false })}}
               >
                 Insert
               </Button>
