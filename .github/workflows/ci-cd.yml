@@ -27,9 +27,9 @@ jobs:
       - name: Build
         run: |
           cd parcial2/frontend
-          npm run build
+          npm run dev
           cd ../backend
-          npm run build
+          npm run start
       
       - name: Login to Azure
         uses: azure/login@v1
