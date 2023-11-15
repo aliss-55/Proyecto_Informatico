@@ -1,0 +1,40 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [build-and-deploy]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x' #Version of node.js
+
+      - name: Install dependencies
+        run: |
+          cd parcial2/frontend
+          npm install
+          cd ../backend
+          npm install
+      
+      - name: Build
+        run: |
+          cd parcial2/frontend
+          npm run build
+          cd ../backend
+          npm run build
+      
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      
+    
