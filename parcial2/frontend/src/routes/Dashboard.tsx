@@ -83,6 +83,10 @@ data();
     mostrarModalInsertar = () => {
       this.setState({
         modalInsertar: true,
+        form: {
+          ...this.state.form,
+          id: this.state.data.length + 1,
+        },
       });
     };
 
@@ -280,6 +284,7 @@ data();
                 className="form-control"
                 name="id"
                 type="text"
+                value={this.state.form.id}
                 onChange={this.handleChange}
                 
               />
@@ -318,6 +323,7 @@ data();
                   onChange={this.handleChange}
                   value={this.state.form.status}
                 >
+                  <option value="null">Select</option>
                   <option value="Pendin">Pending</option>
                   <option value="In_Progress">In Progress</option>
                   <option value="Done">Done</option>
