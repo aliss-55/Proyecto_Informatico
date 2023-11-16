@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       - name: Setup Node.js
         uses: actions/setup-node@v1
@@ -30,12 +30,5 @@ jobs:
           npm run build
           cd ../frontend
           npm run build
-          
-      
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       
     
