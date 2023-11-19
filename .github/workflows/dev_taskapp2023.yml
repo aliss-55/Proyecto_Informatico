@@ -26,14 +26,16 @@ jobs:
           cd parcial2/backend
           npm install
           npm run build 
-        env:
-          CI: true
           
-      - name: Archive backend artifacts
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
+
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: backend-artifacts
-          path: backend/dist
+          name: node-app
+          path: release.zip
+
 
   build_frontend:
     runs-on: ubuntu-latest
@@ -66,19 +68,24 @@ jobs:
     needs: build_backend
  
     steps:
-      - name: Download backend artifact
-        uses: actions/download-artifact@v2
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
         with:
-          name: backend-artifacts
-          path: backend-artifacts
+          name: node-app
 
-      - name: Deploy Nest.js to Azure Web App (Backend)
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'taskapp2023'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CFB62C978C304B3FA07C228D79927B29 }}
-          package: backend-artifacts
+          package: .
+        env:
+          AZURE_CORE_COLLECT_TELEMETRY: 'no'
           
   deploy_frontend:
     runs-on: ubuntu-latest
