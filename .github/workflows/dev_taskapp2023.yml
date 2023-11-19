@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: backend-artifacts
-          path: backend/dist
+          path: parcial2/backend/dist
 
   build_frontend:
     runs-on: ubuntu-latest
