@@ -60,8 +60,8 @@
       "json",
       "ts"
     ],
-    "rootDir": "backend/src/test/",
-    "testRegex": "backend/src/test/.*\\.(spec|test)\\.ts$",
+    "rootDir": "src/test/",
+    "testRegex": "src/test/.*\\.(spec|test)\\.ts$",
     "verbose": true,
     "testPathIgnorePatterns": [
       "/node_modules/"
