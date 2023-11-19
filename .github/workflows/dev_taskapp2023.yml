@@ -92,8 +92,8 @@ jobs:
           path: frontend-artifacts
 
       - name: Upload to Azure Storage Static Website
-        uses: Azure/storage-deploy@v1
+        uses: Azure/cli@v1
         with:
-          storage-account-name: ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
-          container-name: 'task'
-          source: 'parcial2/frontend/dist'
+          azcliversion: latest
+          inlineScript: |
+            az storage blob upload-batch --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} --destination ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }} --source parcial2/frontend/dist --pattern "*"
