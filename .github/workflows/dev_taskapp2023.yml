@@ -91,13 +91,12 @@ jobs:
           name: frontend-artifacts
           path: frontend-artifacts
 
-      - name: Deploy React to Azure Storage Static Website (Frontend)
-        uses: Azure/cli@v1
+      - name: Upload to Azure Storage Static Website
+        uses: Azure/static-web-apps-deploy@v1
         with:
           app-location: 'frontend'
           output-location: 'frontend/dist'
           index-document: 'index.html'
         env:
           AZURE_STORAGE_ACCOUNT_NAME: ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
-          AZURE_STORAGE_CONTAINER_NAME: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
           AZURE_STORAGE_ACCESS_KEY: ${{ secrets.AZURE_STORAGE_ACCESS_KEY }}
