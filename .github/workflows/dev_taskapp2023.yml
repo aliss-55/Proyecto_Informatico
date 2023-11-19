@@ -58,7 +58,7 @@ jobs:
       - name: Archive frontend artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: backend-artifacts
+          name: frontend-artifacts
           path: parcial2/frontend/dist
 
   deploy_backend:
