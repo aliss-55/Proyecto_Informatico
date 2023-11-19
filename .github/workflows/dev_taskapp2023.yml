@@ -59,7 +59,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: backend-artifacts
-          path: frontend/build
+          path: parcial2/frontend/dist
 
   deploy_backend:
     runs-on: ubuntu-latest
@@ -95,5 +95,5 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           app-location: 'frontend'
-          output-location: 'frontend/build'
+          output-location: 'parcial2/frontend/dist'
           index-document: 'index.html'
