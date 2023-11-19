@@ -92,8 +92,10 @@ jobs:
           path: frontend-artifacts
 
       - name: Deploy React to Azure Storage Static Website (Frontend)
-        uses: Azure/static-web-apps-deploy@v1
+        uses: Azure/cli@v1
         with:
-          app-name: 'teskstorage'
-          publish-profile: ${{ secrets.AZURE_STORAGE_PUBLISH_PROFILE }}
-          package: 'frontend/dist'
+          azcliversion: latest
+          inlineScript: |
+            az storage blob upload-batch --account-name <storage_account_name> --destination <container_name> --source frontend/build
+        env:
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
