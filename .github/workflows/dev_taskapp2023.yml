@@ -90,6 +90,8 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CFB62C978C304B3FA07C228D79927B29 }}
           package: backend-artifacts
+        env:
+          AZURE_CORE_COLLECT_TELEMETRY: 'no'
   
 
           
