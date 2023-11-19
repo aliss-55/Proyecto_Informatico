@@ -94,8 +94,10 @@ jobs:
       - name: Deploy React to Azure Storage Static Website (Frontend)
         uses: Azure/cli@v1
         with:
-          azcliversion: latest
-          inlineScript: |
-            az storage blob upload-batch --account-name 'teskstorage' --destination '$web' --source frontend/dist
+          app-location: 'frontend'
+          output-location: 'frontend/dist'
+          index-document: 'index.html'
         env:
-          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          AZURE_STORAGE_ACCOUNT_NAME: ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}
+          AZURE_STORAGE_CONTAINER_NAME: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
+          AZURE_STORAGE_ACCESS_KEY: ${{ secrets.AZURE_STORAGE_ACCESS_KEY }}
