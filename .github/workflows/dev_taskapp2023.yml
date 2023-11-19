@@ -96,6 +96,6 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
-            az storage blob upload-batch --account-name <storage_account_name> --destination <container_name> --source frontend/build
+            az storage blob upload-batch --account-name 'teskstorage' --destination '$web' --source frontend/dist
         env:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
