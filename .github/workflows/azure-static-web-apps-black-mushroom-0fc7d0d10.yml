@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - taskapp2023
+name: Azure Static Web Apps CI/CD
 
 on:
   push:
@@ -47,51 +44,3 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_MUSHROOM_0FC7D0D10 }}
           action: "close"
-          
-  build_backend:
-    runs-on: ubuntu-latest
-    needs: build_and_deploy_job
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-
-      - name: Install Nest.js dependencies and build backend
-        run: |
-          cd parcial2/backend
-          npm install
-          npm run build 
-        env:
-          CI: true
-          
-      - name: Archive backend artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: backend-artifacts
-          path: parcial2/backend/dist
-  deploy_backend:
-    runs-on: ubuntu-latest
-    needs: build_backend
-  
-    steps:
-      - name: Download backend artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: backend-artifacts
-          path: backend-artifacts
-  
-      - name: Deploy Nest.js to Azure Web App (Backend)
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'taskapp2023'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CFB62C978C304B3FA07C228D79927B29 }}
-          package: backend-artifacts
-        env:
-          AZURE_CORE_COLLECT_TELEMETRY: 'no'
-  
-
-          
