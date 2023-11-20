@@ -10,11 +10,11 @@ import { Task } from './tasks/task.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
+      type: 'mssql',
+      host: 'askapp.database.windows.net',
+      port: 1433,
+      username: 'adminAskapp',
+      password: 'ProyInf2023-03',
       database: 'askapp',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: false,
