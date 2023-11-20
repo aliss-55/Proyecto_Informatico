@@ -5,9 +5,11 @@ const app_module_1 = require("./app.module");
 const common_1 = require("@nestjs/common");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    const PORT = 1433;
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.enableCors({ origin: '*' });
-    await app.listen(3000);
+    await app.listen(PORT);
+    console.log(`server running on port ${PORT}`);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
