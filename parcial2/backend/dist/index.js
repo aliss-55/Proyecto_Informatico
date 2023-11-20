@@ -12,4 +12,4 @@ async function bootstrap() {
     console.log(`server running on port ${PORT}`);
 }
 bootstrap();
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=index.js.map
