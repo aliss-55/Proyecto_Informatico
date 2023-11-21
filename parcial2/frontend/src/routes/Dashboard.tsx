@@ -148,12 +148,17 @@ data();
       };
     };
     editar = (dato: any) => {
+      var jsonedit = {
+        "title": dato.title,
+        "description": dato.description,
+        "status": dato.status,
+      }
       return fetch(`http://20.121.113.4:3000/tasks/${dato.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(dato),
+        body: JSON.stringify(jsonedit),
       })
         .then((response) => {
           if (!response.ok) {
