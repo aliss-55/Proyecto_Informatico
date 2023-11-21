@@ -14,7 +14,7 @@ export default function Login() {
   // }
 
   const login = () => {
-    fetch("http://20.121.113.4:3000/auth/login", {
+    fetch("https://20.121.113.4:3000/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
