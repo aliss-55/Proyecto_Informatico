@@ -44,13 +44,8 @@ data();
         description: "",
         status: "",
       },
-      isLoggedIn: true, 
     };
-
-    handleLogout = () => {
-      this.setState({ isLoggedIn: false });
-    };
-  
+    
     actualizar() {
       fetch("http://20.121.113.4:3000/tasks", {
         method: "GET",
@@ -357,14 +352,6 @@ data();
               </Button>
             </ModalFooter>
           </Modal>
-          <Button color="success" onClick={() => this.mostrarModalInsertar()}>
-            Create
-          </Button>{" "}
-          {this.state.isLoggedIn && (
-            <Button color="danger" onClick={this.handleLogout}>
-              Logout
-            </Button>
-            )}
         </>
       );
     }
