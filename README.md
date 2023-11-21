@@ -2,6 +2,29 @@
 
 ## Group 5
 
+## IMPORTANT NOTE
+This is an important message for anyone who wants to test our app. We tried to learn how to deploy All our app in Azure (Database + BackEnd + FrontEnd),
+BUT we have encountered many errors in the process (you can see all of our attempts in the actions list) and we solve a bunch of them, but not all.
+The DataBase and the frontEnd are deployed correctly, but for the BackEnd we didn't know how to solve the issues we've encountered this weeks,
+So a solution we've found for this problem is to mount the backend in a VM (provided by Azure) and run the app, making the frontend to send all 
+requests to that machine `https://20.121.113.4:3000`. Other problem is the Secure Connection. The FrontEnd make the request and FORCES the resorce
+to be with HTTPS, as we explained before, running the back in a VM makes the response with HTTP (being it not secure) and cause some issues.
+
+BUT, we have found a particulary solution:
+
+1. Enter the next link [Obtain the certificate](https://20.121.113.4:3000/auth/login)
+2. Ignore the warning and make the browser enter the link to get all the user data.
+   Go to "Detailed info" or "Advanced" and select the option similar to "Proceed to -- anyways"
+   This will cause you to get the Auto-Signed certificate for our app
+3. Acces the next link [FrontEnd](https://black-mushroom-0fc7d0d10.4.azurestaticapps.net/)
+
+This is something we don't understand perfectly why this happen, BUT, is a solution.
+
+To RUN the automated tests (made with JEST) for the BackEnd, go to the brach "unit_test_full", 
+and run this command in the backend `npm i` and then `npm run test`.
+
+Apologies in advance for all this mess up project, we tried our best D':
+
 ### Developers:
 
 1. Alisson Tobar Ariza
@@ -9,16 +32,6 @@
 3. Simon David Colmenares Sanchez
 4. Diego Maya Perea
 5. Julian David Velasquez Patiño
-
-## IMPORTANT NOTE
-The developer team has taken the decision to migrate from PHP to TypeScript with frameworks like NestJS and React. This changes
-will be uploaded inside the folder named "parcial2"
-
-To use this new app, please follow the next steps:
-
-1. Open a terminal inside each carpet (except "Database") and run the comand "npm install"
-2. To run the Backend, in the open terminal asociated to "backend" run "npm run start:dev"
-3. To run the Frontend, in the open terminal asociated to "frontend" run "npm run dev"
 
 ## Functional Requirements
 
