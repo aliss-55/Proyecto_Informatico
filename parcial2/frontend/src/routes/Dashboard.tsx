@@ -81,11 +81,12 @@ data();
     };
 
     mostrarModalInsertar = () => {
+      const maxId = this.state.data.reduce((max, item) => (item.id > max ? item.id : max), 0);
       this.setState({
         modalInsertar: true,
         form: {
           ...this.state.form,
-          id: this.state.data.length + 1,
+          id: maxId + 1,
         },
       });
     };
