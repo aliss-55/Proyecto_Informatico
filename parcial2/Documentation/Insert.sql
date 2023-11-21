@@ -1,6 +1,5 @@
--- Insertar datos en la tabla 'users'
-use askapp;
-INSERT INTO users ([user], email, [password])
+INSERT INTO
+    `users` (user, email, password)
 VALUES
     (
         'user',
@@ -13,16 +12,18 @@ VALUES
         '$2b$10$LH8NrqJ/UgUP/IGkV/ib3.2FNAHS.wooATj6kfLL45gs602EdsxCS'
     );
 
--- Insertar datos en la tabla 'tasks'
-INSERT INTO dbo.tasks (title, description, status)
+INSERT INTO 
+    `tasks` (`id`, `title`, `description`, `status`) 
 VALUES
     (
-        'Funcionalidad Task',
-        'Completar la funcionalidad de las tareas',
+        1, 
+        'Funcionalidad Task', 
+        'Completar la funcionalidad de las tareas', 
         'Pendin'
     ),
     (
-        'Javo',
-        'Entender la Conexion del fronted con el backend',
+        2, 
+        'Javo', 
+        'Entender la Conexion del fronted con el backend', 
         'Done'
     );
