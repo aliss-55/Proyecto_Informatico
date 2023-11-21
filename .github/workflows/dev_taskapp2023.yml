@@ -64,6 +64,7 @@ jobs:
           cd parcial2/backend
           npm install
           npm run build 
+          npm run test
         env:
           CI: true
           
