@@ -14,7 +14,7 @@ import {
 
 var newData = new Array();
 function data() {
-  fetch("http://localhost:3000/tasks", {
+  fetch("http://20.121.113.4:3000/tasks", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -47,7 +47,7 @@ data();
     };
     
     actualizar() {
-      fetch("http://localhost:3000/tasks", {
+      fetch("http://20.121.113.4:3000/tasks", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +104,7 @@ data();
     };
 
     insertar = (dato: any) => {
-      return fetch(`http://localhost:3000/tasks/`, {
+      return fetch(`http://20.121.113.4:3000/tasks/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -128,7 +128,7 @@ data();
     eliminar = (dato: any) => {
       var opcion = window.confirm("Are you sure you want to delete the item " + dato.id);
       if (opcion == true) {
-        return fetch(`http://localhost:3000/tasks/${dato.id}`, {
+        return fetch(`http://20.121.113.4:3000/tasks/${dato.id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -147,7 +147,7 @@ data();
       };
     };
     editar = (dato: any) => {
-      return fetch(`http://localhost:3000/tasks/${dato.id}`, {
+      return fetch(`http://20.121.113.4:3000/tasks/${dato.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
