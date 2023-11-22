@@ -1,0 +1,98 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - taskapp2023
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - dev
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          lfs: false
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_MUSHROOM_0FC7D0D10 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "/parcial2/frontend" # App source code path
+          api_location: "" # Api source code path - optional
+          output_location: "dist" # Built app content directory - optional
+          ###### End of Repository/Build Configurations ######
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_MUSHROOM_0FC7D0D10 }}
+          action: "close"
+          
+  build_backend:
+    runs-on: ubuntu-latest
+    needs: build_and_deploy_job
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install Nest.js dependencies and build backend
+        run: |
+          cd parcial2/backend
+          npm install
+          npm run build 
+          npm run test
+        env:
+          CI: true
+          
+      - name: Archive backend artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-artifacts
+          path: parcial2/backend/dist
+  deploy_backend:
+    runs-on: ubuntu-latest
+    needs: build_backend
+  
+    steps:
+      - name: Download backend artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: backend-artifacts
+          path: backend-artifacts
+  
+      - name: Deploy Nest.js to Azure Web App (Backend)
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'taskapp2023'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CFB62C978C304B3FA07C228D79927B29 }}
+          package: backend-artifacts
+        env:
+          AZURE_CORE_COLLECT_TELEMETRY: 'no'
+  
+
+          
